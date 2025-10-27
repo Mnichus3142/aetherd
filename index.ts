@@ -6,6 +6,7 @@ const app = express();
 const server = createServer(app);
 
 app.use(express.static('public'));
+app.use(express.json());
 
 const PORT = 3000;
 
@@ -40,7 +41,7 @@ const evaluateExpression = async (prompt: string) => {
         return result.toString();
     } catch (error) {
         const response = await locker.response(prompt, 5);
-        return response;
+        return response.map(key => key[0]);
     }
 }
 
@@ -55,6 +56,11 @@ wss.on('connection', (ws) => {
     ws.on('close', () => {
         console.log('Client disconnected');
     });
+});
+
+app.post("/run", (req, res) => {
+    locker.openApp(req.body.message);
+    res.sendStatus(200);
 });
 
 server.listen(PORT, () => {
