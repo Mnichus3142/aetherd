@@ -1,4 +1,5 @@
 import { execSync, exec } from "child_process";
+import open from "open";
 
 export class Locker {
     private vault = new Map<string, any>();
@@ -70,18 +71,31 @@ export class Locker {
     }
 
     async response(key: string, howMany: number): Promise<string[]> {
-        const responses = this.vault.get(key[0]);
+        const keyLower = key.toLowerCase();
+        const startsWithResults: string[] = [];
+        const containsResults: string[] = [];
 
-        if (responses) {
-            return responses.filter((app: string[]) => app[0].toLowerCase().includes(key.toLowerCase())).slice(0, howMany);
-        } else {
-            return [];
+        for (const [, apps] of this.vault.entries()) {
+            for (const app of apps) {
+                const appNameLower = app[0].toLowerCase();
+                if (appNameLower.startsWith(keyLower)) {
+                    startsWithResults.push(app);
+                } else if (appNameLower.includes(keyLower)) {
+                    containsResults.push(app);
+                }
+            }
         }
+
+        return [...startsWithResults, ...containsResults].slice(0, howMany);
     }
 
-    openApp(appName: string) {
-        const letterSet = this.vault.get(appName[0]).filter((app: string[]) => app[0] === appName)[0][1];
-        console.log(letterSet);
-        exec(`nohup ${letterSet} >/dev/null 2>&1 &`);
+    openApp(appName: string, searchInWeb: boolean, searchQuery: string): void {
+        console.log("Opening app:", appName, "Search in web:", searchInWeb);
+        if (searchInWeb) {
+            open(searchQuery.replace("%s", appName));
+        } else {
+            const letterSet = this.vault.get(appName[0]).filter((app: string[]) => app[0] === appName)[0][1];
+            exec(`nohup ${letterSet} >/dev/null 2>&1 &`);
+        }
     }
 }

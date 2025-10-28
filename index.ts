@@ -1,5 +1,5 @@
 import express from 'express';
-import { createServer } from 'http';
+import { createServer, get } from 'http';
 import { WebSocketServer } from 'ws';
 
 const app = express();
@@ -17,9 +17,12 @@ import {
 } from 'mathjs'
 
 import { Locker } from './lib/locker';
+import { Config } from './lib/createConfig';
 
 const locker = new Locker();
 locker.prepare();
+
+const config = new Config();
 
 const evaluateExpression = async (prompt: string) => {
     try {
@@ -59,7 +62,7 @@ wss.on('connection', (ws) => {
 });
 
 app.post("/run", (req, res) => {
-    locker.openApp(req.body.message);
+    locker.openApp(req.body.message, req.body.searchInWeb, config.getConfig("aether-launcher").searchQuery);
     res.sendStatus(200);
 });
 
