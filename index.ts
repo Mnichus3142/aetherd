@@ -1,71 +1,96 @@
-import express from 'express';
-import { createServer, get } from 'http';
-import { WebSocketServer } from 'ws';
+const info = require('./modules/info');
 
-const app = express();
-const server = createServer(app);
+console.log(info.info())
 
-app.use(express.static('public'));
-app.use(express.json());
+// import express from 'express';
+// import { createServer } from 'http';
+// import { WebSocketServer } from 'ws';
 
-const PORT = 3000;
+// const app = express();
+// const server = createServer(app);
 
-const wss = new WebSocketServer({ server });
+// const app2 = express();
+// const server2 = createServer(app2);
 
-import {
-  atan2, chain, derivative, e, evaluate, log, pi, pow, round, sqrt
-} from 'mathjs'
+// app.use(express.static('public'));
+// app.use(express.json());
 
-import { Locker } from './lib/locker';
-import { Config } from './lib/createConfig';
+// app2.use(express.static('public'));
+// app2.use(express.json());
 
-const locker = new Locker();
-locker.prepare();
+// const PORT = 3000;
+// const PORT2 = 3001;
 
-const config = new Config();
+// const wss = new WebSocketServer({ server: server });
 
-const evaluateExpression = async (prompt: string) => {
-    try {
-        if (prompt.length < 2) {
-            throw new Error('Prompt too short for math evaluation');
-        }
+// const wss2 = new WebSocketServer({ server: server2 });
 
-        const result = evaluate(prompt, {
-            atan2,
-            derivative,
-            e,
-            log,
-            pi,
-            pow,
-            round,
-            sqrt
-        });
+// import {
+//   atan2, derivative, e, evaluate, log, pi, pow, round, sqrt
+// } from 'mathjs'
 
-        return result.toString();
-    } catch (error) {
-        const response = await locker.response(prompt, 5);
-        return response.map(key => key[0]);
-    }
-}
+// import { Locker } from './lib/locker';
+// import { Config } from './lib/createConfig';
 
-wss.on('connection', (ws) => {
-    console.log('New client connected');
+// const locker = new Locker();
+// locker.prepare();
 
-    ws.on('message', async (message) => {
-        console.log(`Received message: ${JSON.parse(message.toString()).message}`);
-        ws.send(JSON.stringify({ message: await evaluateExpression(JSON.parse(message.toString()).message) }));
-    });
+// const config = new Config();
 
-    ws.on('close', () => {
-        console.log('Client disconnected');
-    });
-});
+// const evaluateExpression = async (prompt: string) => {
+//     try {
+//         if (prompt.length < 2) {
+//             throw new Error('Prompt too short for math evaluation');
+//         }
 
-app.post("/run", (req, res) => {
-    locker.openApp(req.body.message, req.body.searchInWeb, config.getConfig("aether-launcher").searchQuery);
-    res.sendStatus(200);
-});
+//         const result = evaluate(prompt, {
+//             atan2,
+//             derivative,
+//             e,
+//             log,
+//             pi,
+//             pow,
+//             round,
+//             sqrt
+//         });
 
-server.listen(PORT, () => {
-    console.log(`Server is listening on http://localhost:${PORT}`);
-});
+//         return result.toString();
+//     } catch (error) {
+//         const response = await locker.response(prompt, 5);
+//         return response.map(key => key[0]);
+//     }
+// }
+
+// wss.on('connection', (ws) => {
+//     console.log('New client connected');
+
+//     ws.on('message', async (message) => {
+//         console.log(`Received message: ${JSON.parse(message.toString()).message}`);
+//         ws.send(JSON.stringify({ message: await evaluateExpression(JSON.parse(message.toString()).message) }));
+//     });
+
+//     ws.on('close', () => {
+//         console.log('Client disconnected');
+//     });
+// });
+
+// wss2.on('connection', (ws2) => {
+//     console.log('New client connected dupa');
+
+//     ws2.on('close', () => {
+//         console.log('Client disconnected dupa');
+//     });
+// });
+
+// app.post("/run", (req, res) => {
+//     locker.openApp(req.body.message, req.body.searchInWeb, config.getConfig("aether-launcher").searchQuery);
+//     res.sendStatus(200);
+// });
+
+// server.listen(PORT, () => {
+//     console.log(`Server is listening on http://localhost:${PORT}`);
+// });
+
+// server2.listen(PORT2, () => {
+//     console.log(`Server is listening on http://localhost:${PORT2}`);
+// });
