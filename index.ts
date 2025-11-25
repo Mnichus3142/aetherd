@@ -1,6 +1,8 @@
 const info = require('./modules/info');
 
-console.log(info.info())
+info.startWatcher((data: any) => {
+    console.log("CPU Usage:", data);
+});
 
 // import express from 'express';
 // import { createServer } from 'http';

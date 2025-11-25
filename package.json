@@ -8,7 +8,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart": "node-gyp configure && node-gyp build && cp -r ./build/Release ./dist/modules",
+    "prestart": "rm -rf ./dist/modules && node-gyp configure && node-gyp build && cp -r ./build/Release ./dist/modules",
     "start": "tsc && node dist/index.js"
   },
   "dependencies": {
