@@ -5,7 +5,7 @@
 
 void cpuUsage(Napi::ThreadSafeFunction tsfn) {
     while (running.load()) {
-        std::string msg = "CPU";
+        std::string msg;
         int32_t total_jiffies_1, total_jiffies_2, work_jiffies_1, work_jiffies_2;
 
         std::ifstream proc_stat_1("/proc/stat");

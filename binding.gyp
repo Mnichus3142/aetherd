@@ -6,7 +6,9 @@
         "lib/api/info.cpp", 
         "lib/api/globals.h",
         "lib/api/functions/cpu.h",
-        "lib/api/functions/cpu.cpp"
+        "lib/api/functions/cpu.cpp",
+        "lib/api/functions/mem.h",
+        "lib/api/functions/mem.cpp"
       ],
       "cflags!": ["-fno-exceptions"],
       "cflags_cc!": ["-fno-exceptions"],

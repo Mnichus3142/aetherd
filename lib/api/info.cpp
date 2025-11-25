@@ -2,26 +2,9 @@
 #include <thread>
 #include "globals.h"
 #include "functions/cpu.h"
+#include "functions/mem.h"
 
 std::atomic<bool> running(true);
-
-// void ramUsage(Napi::ThreadSafeFunction tsfn) {
-//     while (running.load()) {
-//         std::this_thread::sleep_for(std::chrono::seconds(1));
-
-//         std::string msg = "RAM";
-
-//         tsfn.BlockingCall(
-//             [msg](Napi::Env env, Napi::Function jsCallback) {
-//                 jsCallback.Call({
-//                     Napi::String::New(env, msg)
-//                 });
-//             }
-//         );
-//     }
-
-//     tsfn.Release();
-// }
 
 Napi::Value startWatcher(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
@@ -36,6 +19,7 @@ Napi::Value startWatcher(const Napi::CallbackInfo& info) {
     );
 
     std::thread(cpuUsage, tsfn).detach();
+    std::thread(memUsage, tsfn).detach();
     return env.Undefined();
 }
 
