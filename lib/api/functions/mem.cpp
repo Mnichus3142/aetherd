@@ -5,8 +5,6 @@
 
 void memUsage(Napi::ThreadSafeFunction tsfn) {
     while (running.load()) {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-
         std::string msg;
 
         std::ifstream proc_mem("/proc/meminfo");
@@ -37,6 +35,8 @@ void memUsage(Napi::ThreadSafeFunction tsfn) {
                 jsCallback.Call({ obj });
             }
         );
+
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
     tsfn.Release();
