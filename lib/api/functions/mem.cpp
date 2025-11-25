@@ -7,7 +7,7 @@ void memUsage(Napi::ThreadSafeFunction tsfn) {
     while (running.load()) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
 
-        std::string msg = "RAM";
+        std::string msg;
 
         std::ifstream proc_mem("/proc/meminfo");
         std::string line;
