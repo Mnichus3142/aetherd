@@ -10,7 +10,9 @@
         "lib/api/functions/mem.h",
         "lib/api/functions/mem.cpp",
         "lib/api/functions/disk.h",
-        "lib/api/functions/disk.cpp"
+        "lib/api/functions/disk.cpp",
+        "lib/api/functions/network.h",
+        "lib/api/functions/network.cpp"
       ],
       "cflags!": ["-fno-exceptions"],
       "cflags_cc!": ["-fno-exceptions"],
