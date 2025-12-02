@@ -8,7 +8,9 @@
         "lib/api/functions/cpu.h",
         "lib/api/functions/cpu.cpp",
         "lib/api/functions/mem.h",
-        "lib/api/functions/mem.cpp"
+        "lib/api/functions/mem.cpp",
+        "lib/api/functions/disk.h",
+        "lib/api/functions/disk.cpp"
       ],
       "cflags!": ["-fno-exceptions"],
       "cflags_cc!": ["-fno-exceptions"],
