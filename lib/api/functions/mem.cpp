@@ -5,7 +5,7 @@
 
 void memUsage(Napi::ThreadSafeFunction tsfn) {
     while (running.load()) {
-        std::string msg;
+        int msg;
 
         std::ifstream proc_mem("/proc/meminfo");
         std::string line;
@@ -23,8 +23,7 @@ void memUsage(Napi::ThreadSafeFunction tsfn) {
 
         proc_mem.close();
 
-        int mem_usage = (double)(total_mem - free_mem) / total_mem * 100.0;
-        msg = std::to_string(mem_usage);
+        msg = (int)((double)(total_mem - free_mem) / (double)total_mem * 100.0);
 
         tsfn.BlockingCall(
             [msg](Napi::Env env, Napi::Function jsCallback) {

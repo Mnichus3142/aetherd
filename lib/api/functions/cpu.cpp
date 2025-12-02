@@ -5,8 +5,8 @@
 
 void cpuUsage(Napi::ThreadSafeFunction tsfn) {
     while (running.load()) {
-        std::string msg;
-        int32_t total_jiffies_1, total_jiffies_2, work_jiffies_1, work_jiffies_2;
+        int msg;
+        int32_t total_jiffies_1 = 0, total_jiffies_2 = 0, work_jiffies_1 = 0, work_jiffies_2 = 0;
 
         std::ifstream proc_stat_1("/proc/stat");
         std::string line;
@@ -46,7 +46,7 @@ void cpuUsage(Napi::ThreadSafeFunction tsfn) {
 
         int8_t cpu_usage = 100.0 * (work_jiffies_2 - work_jiffies_1) / (total_jiffies_2 - total_jiffies_1);
 
-        msg = std::to_string(cpu_usage);
+        msg = (int)cpu_usage;
 
         tsfn.BlockingCall(
             [msg](Napi::Env env, Napi::Function jsCallback) {

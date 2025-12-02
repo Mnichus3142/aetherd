@@ -12,7 +12,9 @@
         "lib/api/functions/disk.h",
         "lib/api/functions/disk.cpp",
         "lib/api/functions/network.h",
-        "lib/api/functions/network.cpp"
+        "lib/api/functions/network.cpp",
+        "lib/api/functions/battery.h",
+        "lib/api/functions/battery.cpp"
       ],
       "cflags!": ["-fno-exceptions"],
       "cflags_cc!": ["-fno-exceptions"],

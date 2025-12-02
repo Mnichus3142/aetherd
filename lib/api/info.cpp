@@ -5,6 +5,7 @@
 #include "functions/mem.h"
 #include "functions/disk.h"
 #include "functions/network.h"
+#include "functions/battery.h"
 
 std::atomic<bool> running(true);
 
@@ -24,6 +25,7 @@ Napi::Value startWatcher(const Napi::CallbackInfo& info) {
     std::thread(memUsage, tsfn).detach();
     std::thread(diskUsage, tsfn).detach();
     std::thread(networkStatus, tsfn).detach();
+    std::thread(batteryStatus, tsfn).detach();
     return env.Undefined();
 }
 

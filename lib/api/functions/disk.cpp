@@ -6,7 +6,7 @@
 
 void diskUsage(Napi::ThreadSafeFunction tsfn) {
     while (running.load()) {
-        std::string msg;
+        int msg;
 
         struct statvfs stat;
         statvfs("/", &stat);
@@ -14,7 +14,7 @@ void diskUsage(Napi::ThreadSafeFunction tsfn) {
         float total_disk = (float)stat.f_blocks;
         float free_disk = (float)stat.f_bavail;
 
-        msg = std::to_string((int)((total_disk - free_disk) / total_disk * 100.0));
+        msg = (int)((total_disk - free_disk) / total_disk * 100.0);
 
         tsfn.BlockingCall(
             [msg](Napi::Env env, Napi::Function jsCallback) {

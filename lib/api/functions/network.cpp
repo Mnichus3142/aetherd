@@ -74,7 +74,7 @@ void networkStatus(Napi::ThreadSafeFunction tsfn) {
                     Napi::Object obj = Napi::Object::New(env);
 
                     obj.Set("net_status", msg);
-                    obj.Set("signal_strength", signal_strength);
+                    obj.Set("net_signal_strength", (int)signal_strength);
 
                     jsCallback.Call({ obj });
                 }
