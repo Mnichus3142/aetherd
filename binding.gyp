@@ -14,7 +14,9 @@
         "lib/api/functions/network.h",
         "lib/api/functions/network.cpp",
         "lib/api/functions/battery.h",
-        "lib/api/functions/battery.cpp"
+        "lib/api/functions/battery.cpp",
+        "lib/api/functions/brightness.h",
+        "lib/api/functions/brightness.cpp"
       ],
       "cflags!": ["-fno-exceptions"],
       "cflags_cc!": ["-fno-exceptions"],
