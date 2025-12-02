@@ -16,7 +16,9 @@
         "lib/api/functions/battery.h",
         "lib/api/functions/battery.cpp",
         "lib/api/functions/brightness.h",
-        "lib/api/functions/brightness.cpp"
+        "lib/api/functions/brightness.cpp",
+        "lib/api/functions/volume.h",
+        "lib/api/functions/volume.cpp"
       ],
       "cflags!": ["-fno-exceptions"],
       "cflags_cc!": ["-fno-exceptions"],

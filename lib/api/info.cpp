@@ -7,6 +7,7 @@
 #include "functions/network.h"
 #include "functions/battery.h"
 #include "functions/brightness.h"
+#include "functions/volume.h"
 
 std::atomic<bool> running(true);
 
@@ -28,6 +29,7 @@ Napi::Value startWatcher(const Napi::CallbackInfo& info) {
     std::thread(networkStatus, tsfn).detach();
     std::thread(batteryStatus, tsfn).detach();
     std::thread(brightness, tsfn).detach();
+    std::thread(volume, tsfn).detach();
     return env.Undefined();
 }
 
