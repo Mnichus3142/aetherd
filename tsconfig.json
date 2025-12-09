@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "CommonJS",
-    "rootDir": ".",          // korzeń projektu
-    "outDir": "dist",        // folder wyjściowy
+    "rootDir": ".",
+    "outDir": "dist",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true

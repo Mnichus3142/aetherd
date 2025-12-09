@@ -29,7 +29,7 @@ void memUsage(Napi::ThreadSafeFunction tsfn) {
             [msg](Napi::Env env, Napi::Function jsCallback) {
                 Napi::Object obj = Napi::Object::New(env);
 
-                obj.Set("mem", msg);
+                obj.Set("ram_usage", msg);
 
                 jsCallback.Call({ obj });
             }

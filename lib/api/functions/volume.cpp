@@ -30,7 +30,7 @@ void volume(Napi::ThreadSafeFunction tsfn) {
                 [msg](Napi::Env env, Napi::Function jsCallback) {
                     Napi::Object obj = Napi::Object::New(env);
 
-                    obj.Set("vol_status", msg);
+                    obj.Set("audio_status", msg);
 
                     jsCallback.Call({ obj });
                 }
@@ -49,8 +49,8 @@ void volume(Napi::ThreadSafeFunction tsfn) {
                 [msg, volume_level](Napi::Env env, Napi::Function jsCallback) {
                     Napi::Object obj = Napi::Object::New(env);
 
-                    obj.Set("vol_status", msg);
-                    obj.Set("vol_level", (int)(std::stof(volume_level) * 100));
+                    obj.Set("audio_status", msg);
+                    obj.Set("audio_level", (int)(std::stof(volume_level) * 100));
 
                     jsCallback.Call({ obj });
                 }

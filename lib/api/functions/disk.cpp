@@ -20,7 +20,7 @@ void diskUsage(Napi::ThreadSafeFunction tsfn) {
             [msg](Napi::Env env, Napi::Function jsCallback) {
                 Napi::Object obj = Napi::Object::New(env);
 
-                obj.Set("disk", msg);
+                obj.Set("disk_usage", msg);
 
                 jsCallback.Call({ obj });
             }

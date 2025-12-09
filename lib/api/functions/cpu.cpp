@@ -52,7 +52,7 @@ void cpuUsage(Napi::ThreadSafeFunction tsfn) {
             [msg](Napi::Env env, Napi::Function jsCallback) {
                 Napi::Object obj = Napi::Object::New(env);
 
-                obj.Set("cpu", msg);
+                obj.Set("cpu_usage", msg);
 
                 jsCallback.Call({ obj });
             }
