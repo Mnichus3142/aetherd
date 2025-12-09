@@ -68,7 +68,7 @@ const evaluateExpression = async (prompt: string) => {
 }
 
 wss.on('connection', (ws) => {
-    console.log('New client connected');
+    console.log('New client connected to runner');
 
     ws.on('message', async (message) => {
         // console.log(`Received message: ${JSON.parse(message.toString()).message}`);
@@ -76,15 +76,20 @@ wss.on('connection', (ws) => {
     });
 
     ws.on('close', () => {
-        console.log('Client disconnected');
+        console.log('Client disconnected from runner');
     });
 });
 
 wss2.on('connection', (ws2) => {
-    console.log('New client connected dupa');
+    console.log('New client connected to bar');
+
+	ws2.on('message', async (message) => {
+		ws2.send(JSON.stringify({ datapack: barDatapack.getter() }));
+		console.log(barDatapack.getter());
+	});
 
     ws2.on('close', () => {
-        console.log('Client disconnected dupa');
+        console.log('Client disconnected from bar');
     });
 });
 
