@@ -10,7 +10,7 @@
 
 <hr>
 
-Check ![here](https://github.com/Mnichus3142/Aether) for details.
+Aetherd is a main hub for all other Aether ecosystem applications. Check ![here](https://github.com/Mnichus3142/Aether) for details.
 
 On my machine it is using around 100 MB or RAM and around 0.1% of CPU.
 
